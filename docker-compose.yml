@@ -3,6 +3,10 @@ services:
   elasticsearch:
     image: elasticsearch:7.9.1
     container_name: elasticsearch
+    deploy:
+      resources:
+        limits:
+          memory: 512m
     ports:
       - "9200:9200"
       - "9300:9300"
