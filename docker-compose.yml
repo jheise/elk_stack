@@ -12,7 +12,7 @@ services:
       - "9300:9300"
     volumes:
       - test_data:/usr/share/elasticsearch/data/
-      - /srv/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /srv/elk/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     healthcheck:
       test: ["CMD-SHELL", "curl --silent --fail http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"'"]
       interval: 10s
@@ -43,8 +43,8 @@ services:
       - "9600:9600"
       - "24224:24224"
     volumes:
-      - /srv/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-      - /srv/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - /srv/elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - /srv/elk/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ls_data:/usr/share/logstash/data
     logging:
       driver: "json-file"
@@ -64,7 +64,7 @@ services:
     ports:
       - "5601:5601"
     volumes:
-      - /srv/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - /srv/elk/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
       - kb_data:/usr/share/kibana/data
     logging:
       driver: "json-file"
